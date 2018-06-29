@@ -18,7 +18,7 @@ An example for converting vgg16 weights to float16
 
 An example for testing vgg16 with float16, ensure 'floatx' in ~/.keras/keras.json is 'float16'
 
-    python run_fp16.py --model='vgg' --weights='vgg16_weights.h5' --dtype='float16'
+    python run.py --model='vgg' --weights='vgg16_weights.h5' --dtype='float16'
 
 ### ImageNet Datatset
 
@@ -36,11 +36,11 @@ DenseNet121 weights download from [DenseNet-Keras](https://github.com/flyyufelix
 There is a backup of weights in [baiduyun（百度云）](https://pan.baidu.com/s/1oIiDqQBVko39M9_C3RvFlQ)
 
 |Model                  | float32              |float16                 |
-| :------------------------------: |:---------------------------------:|:---------------------------------: |
+| :-------------------: |:--------------------:|:---------------------: |
 | VGG16                 | 0.70786/0.8979       | 0.70796/0.89786        |
 |ResNet50               | 0.74366/0.91806      | 0.70508/0.89466        |
 |Inceptionv3            | 0.76518/0.92854      | 0.765/0.92854          |
-|Inception-ResNet       | 0.789/0.94426        | |
+|Inception-ResNet       | 0.789/0.94426        | 0.7888/0.94436          |
 |DenseNet121            | 0.74234/0.91868      | 0.74206/0.91868        |
 |Xception               | 0.77446/0.93618      | fail                   |
 |MobileNet-1-0          | 0.69856/0.89174      | fail |
