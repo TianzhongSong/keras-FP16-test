@@ -18,6 +18,8 @@ class DataGenerator(object):
             im = self.str2img(im)
             if self.model not in ['inception', 'xception', 'mobilenet', 'inception_resnet']:
                 im = cv2.cvtColor(im, cv2.COLOR_BGR2RGB)
+            if self.model == 'squeezenet':
+                im = cv2.resize(im, (227, 227))
             if self.model in ['inception', 'xception', 'inception_resnet']:
                 im = cv2.resize(im, (299, 299))
             im = self.preprocessing(im, model=self.model)
@@ -40,7 +42,7 @@ class DataGenerator(object):
         dtype = np.float16 if dtype == 'float16' else np.float32
         im = im.astype(dtype)
         im = np.expand_dims(im, axis=0)
-        if model == 'vgg' or model == 'resnet':
+        if model == 'vgg' or model == 'resnet' or model=='squeezenet':
             im[..., 0] -= 103.939
             im[..., 1] -= 116.779
             im[..., 2] -= 123.68
