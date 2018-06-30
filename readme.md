@@ -26,8 +26,9 @@ sincerely thanks to aaron-xichen for sharing this processed ImageNet val data.
 
 Notice: DepthWiseConv dose not support float16 in tensorflow1.3.0
 
-Pre-trained weights file download from [deep learning models](https://github.com/fchollet/deep-learning-models), 
-DenseNet121 weights download from [DenseNet-Keras](https://github.com/flyyufelix/DenseNet-Keras)
+Pre-trained weights file downloaded from [deep learning models](https://github.com/fchollet/deep-learning-models), 
+DenseNet121 weights downloaded from [DenseNet-Keras](https://github.com/flyyufelix/DenseNet-Keras)
+Squeezenet weights downloaded from [keras-squeezenet](https://github.com/rcmalli/keras-squeezenet)
 
 There is a backup of weights in [baiduyun（百度云）](https://pan.baidu.com/s/17PHfl34pdiqPu0-87MqQvQ)
 
