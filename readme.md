@@ -24,6 +24,8 @@ sincerely thanks to aaron-xichen for sharing this processed ImageNet val data.
 
 ### Results
 
+TOP1 acc and TOP5 acc on ImageNet val data.
+
 Notice: DepthWiseConv dose not support float16 in tensorflow1.3.0
 
 Pre-trained weights file downloaded from [deep learning models](https://github.com/fchollet/deep-learning-models), 
