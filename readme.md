@@ -12,11 +12,7 @@ tqdm
 
 ### Usage
 
-An example for converting vgg16 weights to float16
-
-    python convert_weight.py --input-weights='vgg16_weights.h5' --output-weights='vgg16_weights_fp16.h5'
-
-An example for testing vgg16 with float16, ensure 'floatx' in ~/.keras/keras.json is 'float16'
+An example for testing vgg16 with float16.
 
     python run.py --model='vgg' --weights='vgg16_weights.h5' --dtype='float16'
 
