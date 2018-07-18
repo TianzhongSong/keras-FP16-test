@@ -51,7 +51,7 @@ if __name__ == "__main__":
 
     print('Evaluating {0} with {1} data type'.format(args.model, args.dtype))
 
-    dg = DataGenerator('./imagenet_val/val224_compressed.pkl', model=args.model, dtype=args.dtype)
+    dg = DataGenerator('./data/val224_compressed.pkl', model=args.model, dtype=args.dtype)
     acc = 0
     acc_top5 = 0
     for im, label in dg.generator():
