@@ -46,6 +46,12 @@ There is a backup of weights in [baiduyun（百度云）](https://pan.baidu.com/
 |[MobileNet-5-0](https://github.com/fchollet/deep-learning-models/releases/download/v0.6/mobilenet_5_0_224_tf.h5)          | 0.6352/0.85006       | 0.62944/0.84644        |   -0.00576/-0.00362   |
 |[MobileNet-2-5](https://github.com/fchollet/deep-learning-models/releases/download/v0.6/mobilenet_2_5_224_tf.h5)          | 0.5134/0.75546       | 0.50272/0.74648         |  -0.01068/-0.00898   |
 
+### ToDo
+
+Object detection
+
+Semantic segmentation
+
 ### Reference
 
 [deep learing models](https://github.com/fchollet/deep-learning-models)
