@@ -10,11 +10,13 @@ opencv==3.2.0
 
 tqdm
 
+## Image Classification Part
+
 ### Usage
 
 An example for testing vgg16 with float16.
 
-    python run.py --model='vgg' --weights='vgg16_weights.h5' --dtype='float16'
+    python run_image_classification.py --model='vgg' --weights='vgg16_weights.h5' --dtype='float16'
 
 ### ImageNet Datatset
 
