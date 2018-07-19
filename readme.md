@@ -14,6 +14,8 @@ tqdm
 
 ### Usage
 
+Firstly, download [ImageNet val data](http://ml.cs.tsinghua.edu.cn/~chenxi/dataset/val224_compressed.pkl)  and model pre-trained weights file.
+
 An example for testing vgg16 with float16.
 
     python run_image_classification.py --model='vgg' --weights='vgg16_weights.h5' --dtype='float16'
