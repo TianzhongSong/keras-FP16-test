@@ -1,7 +1,5 @@
 # coding=utf8
 from models.keras_ssd300 import ssd_300
-from keras.optimizers import Adam
-from utils.keras_ssd_loss import SSDLoss
 from utils.object_detection_2d_data_generator import DataGenerator
 from utils.coco_utils import get_coco_category_maps, predict_all_to_json
 from utils.average_precision_evaluator import Evaluator
@@ -65,12 +63,9 @@ if __name__ == '__main__':
 
     K.set_floatx(args.dtype)
 
-    if args.mdoel == 'ssd300':
+    if args.model == 'ssd300':
         img_height, img_width = 300, 300
         model = create_model(model_type=args.model, dataset=args.eval_dataset, dtype=args.dtype)
-        adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
-        ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
-        model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
         n_classes = 20 if args.eval_dataset == 'voc2007' else 80
 
         dataset = DataGenerator()
@@ -116,7 +111,7 @@ if __name__ == '__main__':
                                 return_average_precisions=True,
                                 verbose=True)
             mean_average_precision, average_precisions, precisions, recalls = results
-            print('Evaluating {0} with {1}'.format(args.mdoel, args.eval_dataset))
+            print('Evaluating {0} with {1}'.format(args.model, args.eval_dataset))
 
             for i in range(1, len(average_precisions)):
                 print("{:<14}{:<6}{}".format(classes[i], 'AP', round(average_precisions[i], 3)))
