@@ -17,11 +17,13 @@ from tqdm import trange
 from math import ceil
 import sys
 
+import numpy as np
 from data_generator.object_detection_2d_geometric_ops import Resize
 from data_generator.object_detection_2d_patch_sampling_ops import RandomPadFixedAR
 from data_generator.object_detection_2d_photometric_ops import ConvertTo3Channels
-from utils.ssd_output_decoder import decode_detections
 from data_generator.object_detection_2d_misc_utils import apply_inverse_transforms
+from utils.yolo3_utils import letterbox_image
+
 
 def get_coco_category_maps(annotations_file):
     '''
@@ -61,7 +63,7 @@ def predict_all_to_json(out_file,
                         data_generator,
                         batch_size,
                         data_generator_mode='resize',
-                        model_mode='training',
+                        mode='ssd300',
                         confidence_thresh=0.01,
                         iou_threshold=0.45,
                         top_k=200,
@@ -142,26 +144,22 @@ def predict_all_to_json(out_file,
     for i in tr:
         # Generate batch.
         batch_X, batch_image_ids, batch_inverse_transforms = next(generator)
+        # pre-process for yolo model
+        if mode[:-3] == 'yolo':
+            tmp = []
+            for item in batch_X:
+                tmp.append(letterbox_image(item, (img_width, img_height)))
+            tmp = np.array(tmp, dtype=np.float32)
+            tmp /= 255.
+            batch_X = tmp
         # Predict.
         y_pred = model.predict(batch_X)
-        # If the model was created in 'training' mode, the raw predictions need to
-        # be decoded and filtered, otherwise that's already taken care of.
-        if model_mode == 'training':
-            # Decode.
-            y_pred = decode_detections(y_pred,
-                                       confidence_thresh=confidence_thresh,
-                                       iou_threshold=iou_threshold,
-                                       top_k=top_k,
-                                       input_coords=pred_coords,
-                                       normalize_coords=normalize_coords,
-                                       img_height=img_height,
-                                       img_width=img_width)
-        else:
-            # Filter out the all-zeros dummy elements of `y_pred`.
-            y_pred_filtered = []
-            for i in range(len(y_pred)):
-                y_pred_filtered.append(y_pred[i][y_pred[i,:,0] != 0])
-            y_pred = y_pred_filtered
+
+        # Filter out the all-zeros dummy elements of `y_pred`.
+        y_pred_filtered = []
+        for i in range(len(y_pred)):
+            y_pred_filtered.append(y_pred[i][y_pred[i,:,0] != 0])
+        y_pred = y_pred_filtered
         # Convert the predicted box coordinates for the original images.
         y_pred = apply_inverse_transforms(y_pred, batch_inverse_transforms)
 
