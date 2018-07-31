@@ -18,11 +18,11 @@ Firstly, download [ImageNet val data](http://ml.cs.tsinghua.edu.cn/~chenxi/datas
 
 An example for testing vgg16 with float16.
 
-    python run_image_classification.py --model='vgg' --weights='vgg16_weights.h5' --dtype='float16'
+    python eval_image_classification.py --model='vgg' --dtype='float16'
 
 An example for testing mobilenet with a width multiplier 1.0.
 
-    python run_image_classification.py --model='mobilenet' --weights='mobilenet_1_0_224_tf.h5' --dtype='float16' --alpha=1.0
+    python eval_image_classification.py --model='mobilenet' --dtype='float16' --alpha=1.0
     
 ### ImageNet Datatset
 
