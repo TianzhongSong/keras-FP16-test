@@ -632,8 +632,7 @@ class Evaluator:
 
                 prediction = predictions_sorted[i]
                 image_id = prediction['image_id']
-                pred_box = np.asarray(list(prediction[['xmin', 'ymin', 'xmax', 'ymax']])) # Convert the structured array element to a regular array.
-
+                pred_box = np.asarray([prediction['xmin'], prediction['ymin'], prediction['xmax'], prediction['ymax']])
                 # Get the relevant ground truth boxes for this prediction,
                 # i.e. all ground truth boxes that match the prediction's
                 # image ID and class ID.
