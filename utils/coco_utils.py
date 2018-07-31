@@ -15,6 +15,7 @@ limitations under the License.
 import json
 from tqdm import trange
 from math import ceil
+from PIL import Image
 import sys
 
 import numpy as np
@@ -148,6 +149,7 @@ def predict_all_to_json(out_file,
         if mode[:-3] == 'yolo':
             tmp = []
             for item in batch_X:
+                item = Image.fromarray(item)
                 tmp.append(letterbox_image(item, (img_width, img_height)))
             tmp = np.array(tmp, dtype=np.float32)
             tmp /= 255.
