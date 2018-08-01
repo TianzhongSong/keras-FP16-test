@@ -20,9 +20,9 @@ import sys
 
 import numpy as np
 from utils.object_detection_2d_geometric_ops import Resize
-from utils..object_detection_2d_patch_sampling_ops import RandomPadFixedAR
-from utils..object_detection_2d_photometric_ops import ConvertTo3Channels
-from utils..object_detection_2d_misc_utils import apply_inverse_transforms
+from utils.object_detection_2d_patch_sampling_ops import RandomPadFixedAR
+from utils.object_detection_2d_photometric_ops import ConvertTo3Channels
+from utils.object_detection_2d_misc_utils import apply_inverse_transforms
 from utils.yolo_utils import letterbox_image
 
 
@@ -146,13 +146,13 @@ def predict_all_to_json(out_file,
         # Generate batch.
         batch_X, batch_image_ids, batch_inverse_transforms = next(generator)
         # pre-process for yolo model
-        if mode[:-3] == 'yolo':
+        if mode in ['yolo320', 'yolo416', 'yolo608']:
             tmp = []
             for item in batch_X:
                 item = Image.fromarray(item)
-                tmp.append(letterbox_image(item, (img_width, img_height)))
-            tmp = np.array(tmp, dtype=np.float32)
-            tmp /= 255.
+                tmp.append(np.array(letterbox_image(item, (img_width, img_height))))
+            # tmp = np.array(tmp, dtype=np.float32)
+            # tmp /= 255.
             batch_X = tmp
         # Predict.
         y_pred = model.predict(batch_X)
