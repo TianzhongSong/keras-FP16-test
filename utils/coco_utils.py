@@ -19,10 +19,10 @@ from PIL import Image
 import sys
 
 import numpy as np
-from ssd_layers.object_detection_2d_geometric_ops import Resize
-from ssd_layers..object_detection_2d_patch_sampling_ops import RandomPadFixedAR
-from ssd_layers..object_detection_2d_photometric_ops import ConvertTo3Channels
-from ssd_layers..object_detection_2d_misc_utils import apply_inverse_transforms
+from utils.object_detection_2d_geometric_ops import Resize
+from utils..object_detection_2d_patch_sampling_ops import RandomPadFixedAR
+from utils..object_detection_2d_photometric_ops import ConvertTo3Channels
+from utils..object_detection_2d_misc_utils import apply_inverse_transforms
 from utils.yolo_utils import letterbox_image
 
 
