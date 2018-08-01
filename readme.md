@@ -8,7 +8,7 @@ tensorflow==1.8.0
 
 opencv==3.2.0
 
-tqdm
+pycocotools, BeautifulSoup4, lxml, tqdm
 
 ## Image Classification Part
 
@@ -157,9 +157,48 @@ There is a backup of weights in [baiduyun（百度云）](https://pan.baidu.com/
   </tr>
 </table>
 
+## Object Detection Part
+
+### Usage
+
+Firstly, download [VOC2007 test set]() and [COCO val set]() datasets, then extract them and modify the path in [scripts](https://github.com/TianzhongSong/keras-FP16-test/blob/master/eval_object_detection.py).
+
+Secondly, download SSD pre-trained weights and put them in 'weights' directory.
+
+[SSD300 VOC](https://drive.google.com/open?id=1M99knPZ4DpY9tI60iZqxXsAxX2bYWDvZ), [SSD300 COCO](https://drive.google.com/open?id=1vmEF7FUsWfHquXyCqO17UaXOPpRbwsdj), [SSD512 VOC](https://drive.google.com/open?id=18nFnqv9fG5Rh_fx6vUtOoQHOLySt4fEx), [SSD512 COCO](https://drive.google.com/open?id=1IJWZKmjkcFMlvaz2gYukzFx4d6mH3py5)
+
+An example for evaluating SSD300 on VOC2007 test set
+
+    python eval_object_detection.py --model='ssd300' --dtype='float16' --eval-dataset='voc2007'
+
+### Results
+
+SSD300 result on VOC2007 test set
+
+<table width="95%">
+  <tr>
+    <td></td>
+    <td colspan=3 align=center>mAP</td>
+  </tr>
+  <tr>
+    <td align=center><b>Model</td>
+    <td align=center>float32</td>
+    <td align=center>float16</td>
+    <td align=center>diff</td>
+  </tr>
+  <tr>
+    <td align=center width="10%"><b>SSD300</td>
+    <td align=center width="10%"><b>0.782</td>
+    <td align=center width="10%"><b>0.769</td>
+    <td align=center width="10%"><b>-0.013</td>
+  </tr>
+</table>
+
+The AP of each category can be found in this [doc](https://github.com/TianzhongSong/keras-FP16-test/blob/master/docs/ssd_results.md)
+
 ### ToDo
 
-Object detection
+Object detection(SSD, Yolo)
 
 Semantic segmentation
 
@@ -171,3 +210,6 @@ Semantic segmentation
 
 [keras-squeezenet](https://github.com/rcmalli/keras-squeezenet)
 
+[ssd_keras](https://github.com/pierluigiferrari/ssd_keras)
+
+[keras-yolo3](https://github.com/qqwweee/keras-yolo3)
