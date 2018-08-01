@@ -19,11 +19,11 @@ from PIL import Image
 import sys
 
 import numpy as np
-from data_generator.object_detection_2d_geometric_ops import Resize
-from data_generator.object_detection_2d_patch_sampling_ops import RandomPadFixedAR
-from data_generator.object_detection_2d_photometric_ops import ConvertTo3Channels
-from data_generator.object_detection_2d_misc_utils import apply_inverse_transforms
-from utils.yolo3_utils import letterbox_image
+from ssd_layers.object_detection_2d_geometric_ops import Resize
+from ssd_layers..object_detection_2d_patch_sampling_ops import RandomPadFixedAR
+from ssd_layers..object_detection_2d_photometric_ops import ConvertTo3Channels
+from ssd_layers..object_detection_2d_misc_utils import apply_inverse_transforms
+from utils.yolo_utils import letterbox_image
 
 
 def get_coco_category_maps(annotations_file):
