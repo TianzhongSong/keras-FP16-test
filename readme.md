@@ -161,7 +161,7 @@ There is a backup of weights in [baiduyun（百度云）](https://pan.baidu.com/
 
 ### Usage
 
-Firstly, download [VOC2007 test set]() and [COCO val set]() datasets, then extract them and modify the path in [scripts](https://github.com/TianzhongSong/keras-FP16-test/blob/master/eval_object_detection.py).
+Firstly, download [VOC2007 test set](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtest_06-Nov-2007.tar) and [COCO2017 val set](http://images.cocodataset.org/zips/val2017.zip), [COCO2017 val set annotations](http://images.cocodataset.org/annotations/stuff_annotations_trainval2017.zip) datasets, then extract them and modify the path in [scripts](https://github.com/TianzhongSong/keras-FP16-test/blob/master/eval_object_detection.py).
 
 Secondly, download SSD pre-trained weights and put them in 'weights' directory.
 
