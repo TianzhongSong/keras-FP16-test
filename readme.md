@@ -171,7 +171,9 @@ Firstly, download [VOC2007 test set](http://host.robots.ox.ac.uk/pascal/VOC/voc2
 
 Secondly, download SSD pre-trained weights and put them in 'weights' directory.
 
-[SSD300 VOC](https://drive.google.com/file/d/1fyDDUcIOSjeiP08vl1WCndcFdtboFXua/view), [SSD300 COCO](https://drive.google.com/open?id=1vmEF7FUsWfHquXyCqO17UaXOPpRbwsdj), [SSD512 VOC](https://drive.google.com/file/d/18nFnqv9fG5Rh_fx6vUtOoQHOLySt4fEx/view), [SSD512 COCO](https://drive.google.com/open?id=1IJWZKmjkcFMlvaz2gYukzFx4d6mH3py5)
+[SSD300 VOC weights](https://drive.google.com/file/d/1fyDDUcIOSjeiP08vl1WCndcFdtboFXua/view), [SSD300 COCO weights](https://drive.google.com/open?id=1vmEF7FUsWfHquXyCqO17UaXOPpRbwsdj), [SSD512 VOC weights](https://drive.google.com/file/d/18nFnqv9fG5Rh_fx6vUtOoQHOLySt4fEx/view), [SSD512 COCO weights](https://drive.google.com/open?id=1IJWZKmjkcFMlvaz2gYukzFx4d6mH3py5)
+
+The method for converting the original YOLOv3 model to a keras model can be found in this [repo](https://github.com/qqwweee/keras-yolo3).
 
 An example for evaluating SSD300 on VOC2007 test set
 
@@ -261,6 +263,8 @@ Object detection(SSD, Yolo)
 
 Semantic segmentation
 
+PointNet
+
 ### Reference
 
 [deep learing models](https://github.com/fchollet/deep-learning-models)
@@ -272,3 +276,9 @@ Semantic segmentation
 [ssd_keras](https://github.com/pierluigiferrari/ssd_keras)
 
 [keras-yolo3](https://github.com/qqwweee/keras-yolo3)
+
+[SegNet-Tutorial](https://github.com/alexgkendall/SegNet-Tutorial)
+
+[Tensorflow-SegNet](https://github.com/tkuanlun350/Tensorflow-SegNet)
+
+[image-segmentation-keras](https://github.com/divamgupta/image-segmentation-keras)
