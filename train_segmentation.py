@@ -1,8 +1,9 @@
-from keras.callbacks import LearningRateScheduler
 from models import unet, segnet
 from utils import segdata_generator
 from keras.optimizers import Adam, SGD
 from keras import backend as K
+from utils.schedules import onetenth_50_75
+from keras.callbacks import ModelCheckpoint
 import os
 import argparse
 import matplotlib
@@ -75,26 +76,22 @@ def main():
                   metrics=['accuracy'])
     model.summary()
 
-    def scheduler(epoch):
-        if epoch == 50:
-            model.lr.set_value(1e-4)
-        elif epoch == 75:
-            model.lr.set_value(1e-5)
-        return model.lr.get_value()
-
-    change_lr = LearningRateScheduler(scheduler)
 
     train = segdata_generator.generator(root_path, train_file, train_batch_size, nClasses, img_height, img_width)
 
     val = segdata_generator.generator(root_path, val_file, val_batch_size, nClasses, img_height, img_width)
 
-    model.fit_generator(train,
+    checkpoint = ModelCheckpoint('./results/{}_weights.h5'.format(args.model),
+                                 monitor='val_acc', save_best_only=True, save_weights_only=True)
+    history = model.fit_generator(train,
                         steps_per_epoch=367 // train_batch_size,
                         validation_data=val,
                         validation_steps=101 // val_batch_size,
                         epochs=epochs,
-                        callbacks=[change_lr],
+                        callbacks=[onetenth_50_75(init_lr), checkpoint],
                         class_weight=loss_weight)
+    plot_history(history, './results/', args.model)
+    save_history(history, './results/', args.model)
     if not os.path.exists('./results/'):
         os.mkdir('./results')
     model.save_weights('./results/{}_weights.h5'.format(args.model))
