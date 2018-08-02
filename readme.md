@@ -10,6 +10,12 @@ opencv==3.2.0
 
 pycocotools, BeautifulSoup4, lxml, tqdm
 
+### How to set float16 compute mode.
+
+    from keras import backend as K
+    
+    K.set_floatx('float16)
+
 ## Image Classification Part
 
 ### Usage
