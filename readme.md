@@ -173,7 +173,7 @@ An example for evaluating SSD300 on VOC2007 test set
 
 ### Results
 
-SSD300 result on VOC2007 test set
+SSD results on VOC2007 test set
 
 <table width="95%">
   <tr>
@@ -192,9 +192,62 @@ SSD300 result on VOC2007 test set
     <td align=center width="10%"><b>0.769</td>
     <td align=center width="10%"><b>-0.013</td>
   </tr>
+  <tr>
+    <td align=center width="10%"><b>SSD512</td>
+    <td align=center width="10%"><b>0.91</td>
+    <td align=center width="10%"><b>0.868</td>
+    <td align=center width="10%"><b>-0.042</td>
+  </tr>
 </table>
 
+Notice: The results of SSD512 seem to not match the results reported in [refered repo](https://github.com/pierluigiferrari/ssd_keras).
+
 The AP of each category can be found in this [doc](https://github.com/TianzhongSong/keras-FP16-test/blob/master/docs/ssd_results.md)
+
+SSD and YOLOv3 results on COCO val2017.
+
+<table width="95%">
+  <tr>
+    <td></td>
+    <td colspan=3 align=center>mAP</td>
+  </tr>
+  <tr>
+    <td align=center><b>Model</td>
+    <td align=center>float32</td>
+    <td align=center>float16</td>
+    <td align=center>diff</td>
+  </tr>
+  <tr>
+    <td align=center width="10%"><b>SSD300</td>
+    <td align=center width="10%"><b>0.424</td>
+    <td align=center width="10%"><b>0.374</td>
+    <td align=center width="10%"><b>-0.050</td>
+  </tr>
+  <tr>
+    <td align=center width="10%"><b>SSD512</td>
+    <td align=center width="10%"><b>0.481</td>
+    <td align=center width="10%"><b>0.448</td>
+    <td align=center width="10%"><b>-0.033</td>
+  </tr>
+  <tr>
+    <td align=center width="10%"><b>YOLO320</td>
+    <td align=center width="10%"><b>to do</td>
+    <td align=center width="10%"><b>to do</td>
+    <td align=center width="10%"><b>to do</td>
+  </tr>
+  <tr>
+    <td align=center width="10%"><b>YOLO416</td>
+    <td align=center width="10%"><b>to do</td>
+    <td align=center width="10%"><b>to do</td>
+    <td align=center width="10%"><b>to do</td>
+  </tr>
+  <tr>
+    <td align=center width="10%"><b>YOLO608</td>
+    <td align=center width="10%"><b>to do</td>
+    <td align=center width="10%"><b>to do</td>
+    <td align=center width="10%"><b>to do</td>
+  </tr>
+</table>
 
 ### ToDo
 
