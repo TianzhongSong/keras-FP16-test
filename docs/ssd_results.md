@@ -114,3 +114,118 @@
     <td align=center><b>-0.002</td>
   </tr>
 </table>
+
+### SSD512 Results on VOC2007
+
+<table width="95%">
+  <tr>
+    <td colspan=1 align=center>category</td>
+    <td colspan=1 align=center>AP(float32)</td>
+    <td colspan=1 align=center>AP(float16)</td>
+    <td colspan=1 align=center>diff</td>
+    <td colspan=1 align=center>category</td>
+    <td colspan=1 align=center>AP(float32)</td>
+    <td colspan=1 align=center>AP(float16)</td>
+    <td colspan=1 align=center>diff</td>
+  </tr>
+  <tr>
+    <td align=center>aeroplane</td>
+    <td align=center><b>0.909</td>
+    <td align=center><b>0.817</td>
+    <td align=center><b>-0.092</td>
+    <td align=center>bicycle</td>
+    <td align=center><b>0.909</td>
+    <td align=center><b>0.909</td>
+    <td align=center><b>0.000</td>
+  </tr>
+  <tr>
+    <td align=center>bird</td>
+    <td align=center><b>0.909</td>
+    <td align=center><b>0.907</td>
+    <td align=center><b>-0.002</td>
+    <td align=center>boat</td>
+    <td align=center><b>0.907</td>
+    <td align=center><b>0.815</td>
+    <td align=center><b>-0.092</td>
+  </tr>
+  <tr>
+    <td align=center>bottle</td>
+    <td align=center><b>0.86</td>
+    <td align=center><b>0.74</td>
+    <td align=center><b>-0.12</td>
+    <td align=center>bus</td>
+    <td align=center><b>0.909</td>
+    <td align=center><b>0.909</td>
+    <td align=center><b>0.000</td>
+  </tr>
+  <tr>
+    <td align=center>car</td>
+    <td align=center><b>0.909</td>
+    <td align=center><b>0.818</td>
+    <td align=center><b>-0.091</td>
+    <td align=center>cat</td>
+    <td align=center><b>0.981</td>
+    <td align=center><b>0.909</td>
+    <td align=center><b>0.072</td>
+  </tr>
+  <tr>
+    <td align=center>chair</td>
+    <td align=center><b>0.905</td>
+    <td align=center><b>0.905</td>
+    <td align=center><b>0.000</td>
+    <td align=center>cow</td>
+    <td align=center><b>0.919</td>
+    <td align=center><b>0.818</td>
+    <td align=center><b>-0.101</td>
+  </tr>
+  <tr>
+    <td align=center>diningtable</td>
+    <td align=center><b>0.908</td>
+    <td align=center><b>0.908</td>
+    <td align=center><b>0.000</td>
+    <td align=center>dog</td>
+    <td align=center><b>0.909</td>
+    <td align=center><b>0.909</td>
+    <td align=center><b>0.000</td>
+  </tr>
+  <tr>
+    <td align=center>horse</td>
+    <td align=center><b>0.909</td>
+    <td align=center><b>0.909</td>
+    <td align=center><b>0.000</td>
+    <td align=center>motorbike</td>
+    <td align=center><b>0.908</td>
+    <td align=center><b>0.909</td>
+    <td align=center><b>0.001</td>
+  </tr>
+  <tr>
+    <td align=center>person</td>
+    <td align=center><b>0.9</td>
+    <td align=center><b>0.816</td>
+    <td align=center><b>-0.084</td>
+    <td align=center>pottedplant</td>
+    <td align=center><b>0.889</td>
+    <td align=center><b>0.813</td>
+    <td align=center><b>-0.076</td>
+  </tr>
+  <tr>
+    <td align=center>sheep</td>
+    <td align=center><b>0.908</td>
+    <td align=center><b>0.817</td>
+    <td align=center><b>-0.091</td>
+    <td align=center>sofa</td>
+    <td align=center><b>0.908</td>
+    <td align=center><b>0.908</td>
+    <td align=center><b>0.000</td>
+  </tr>
+  <tr>
+    <td align=center>train</td>
+    <td align=center><b>0.909</td>
+    <td align=center><b>0.909</td>
+    <td align=center><b>0.000</td>
+    <td align=center>tvmonitor</td>
+    <td align=center><b>0.925</td>
+    <td align=center><b>0.907</td>
+    <td align=center><b>-0.018</td>
+  </tr>
+</table>
