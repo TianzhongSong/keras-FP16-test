@@ -1,13 +1,12 @@
 import numpy as np
 import cv2
 import random
-import os
 import sys
 
 sys.path.append('../')
 
 
-def get_batch(items, root_path, nClasses, height, width, train=True):
+def get_batch(items, root_path, nClasses, height, width):
     x = []
     y = []
     for item in items:
@@ -15,26 +14,42 @@ def get_batch(items, root_path, nClasses, height, width, train=True):
         label_path = root_path + item.split(' ')[-1].strip()
         img = cv2.imread(image_path, 1)
         label_img = cv2.imread(label_path, 1)
-        # random flip images during training
-        if train:
-            is_flip = random.randint(0, 1)
-            if is_flip == 1:
-                img = cv2.flip(img, 1)
-                label_img = cv2.flip(label_img, 1)
-        label_img = label_img[:, :, 0]
+        im = np.zeros((height, width, 3), dtype='uint8')
+        im[:, :, :] = 128
+        lim = np.zeros((height, width, 3), dtype='uint8')
+
+        if img.shape[0] >= img.shape[1]:
+            scale = img.shape[0] / height
+            new_width = int(img.shape[1] / scale)
+            diff = (width - new_width) // 2
+            img = cv2.resize(img, (new_width, height))
+            label_img = cv2.resize(label_img, (new_width, height))
+
+            im[:, diff:diff + new_width, :] = img
+            lim[:, diff:diff + new_width, :] = label_img
+        else:
+            scale = img.shape[1] / width
+            new_height = int(img.shape[0] / scale)
+            diff = (height - new_height) // 2
+            img = cv2.resize(img, (width, new_height))
+            label_img = cv2.resize(label_img, (width, new_height))
+            im[diff:diff + new_height, :, :] = img
+            lim[diff:diff + new_height, :, :] = label_img
+        lim = lim[:, :, 0]
         seg_labels = np.zeros((height, width, nClasses))
         for c in range(nClasses):
-            seg_labels[:, :, c] = (label_img == c).astype(int)
-        img = np.float32(img) / 127.5 - 1
+            seg_labels[:, :, c] = (lim == c).astype(int)
+        im = np.float32(im) / 127.5 - 1
         seg_labels = np.reshape(seg_labels, (width * height, nClasses))
-        x.append(img)
+        x.append(im)
         y.append(seg_labels)
     return x, y
 
 
-def generator(root_path, path_file, batch_size, n_classes, input_height, input_width):
-    items = os.listdir(path_file)
-
+def generator(root_path, path_file, batch_size, n_classes, input_height, input_width, train=True):
+    f = open(path_file, 'r')
+    items = f.readlines()
+    f.close()
     while True:
         shuffled_items = []
         index = [n for n in range(len(items))]
