@@ -61,7 +61,7 @@ if __name__ == '__main__':
             gt = gt.reshape((input_height * input_width))
             gt_img = np.zeros_like(gt)
             pt_img = np.zeros_like(gt)
-            gt_img[:] += (gt[:] == c).astype('uint8')
+            gt_img[:] += (gt[:] == 1).astype('uint8')
             pt_img[:] += (pt[:] == c).astype('uint8')
             if not (pt_img == np.zeros_like(pt_img)).all() or not (gt_img == np.zeros_like(gt_img)).all():
                 iou[c - 1] += compute_iou(pt_img, gt_img)
