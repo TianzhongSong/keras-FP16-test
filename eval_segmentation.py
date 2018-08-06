@@ -26,7 +26,7 @@ if __name__ == '__main__':
     args = parse.parse_args()
 
     K.set_floatx(args.dtype)
-    
+
     n_classes = args.nClasses
     images_path = '../../datasets/segmentation/'
     val_file = './data/seg_test.txt' if n_classes == 2 else './data/parse_test.txt'
@@ -51,7 +51,7 @@ if __name__ == '__main__':
     pbdr = tqdm(total=5000)
     iou = [0. for _ in range(1, n_classes)]
     count = [0. for _ in range(1, n_classes)]
-    for x, y in generator(images_path, val_file, 1, n_classes, input_height, input_width, train=False):
+    for x, y in generator(images_path, val_file, 1, n_classes, input_height, input_width, dtype=args.dtype, train=False):
         pbdr.update(1)
         pr = m.predict(x)[0]
         pr = pr.reshape((input_height, input_width, n_classes)).argmax(axis=2)
