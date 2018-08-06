@@ -6,7 +6,7 @@ import sys
 sys.path.append('../')
 
 
-def get_batch(items, root_path, nClasses, height, width):
+def get_batch(items, root_path, nClasses, height, width, dtype='float32'):
     x = []
     y = []
     for item in items:
@@ -39,14 +39,17 @@ def get_batch(items, root_path, nClasses, height, width):
         seg_labels = np.zeros((height, width, nClasses))
         for c in range(nClasses):
             seg_labels[:, :, c] = (lim == c).astype(int)
-        im = np.float32(im) / 127.5 - 1
+        if dtype == 'float32':
+            im = np.float32(im) / 127.5 - 1
+        else:
+            im = np.float16(im) / 127.5 - 1
         seg_labels = np.reshape(seg_labels, (width * height, nClasses))
         x.append(im)
         y.append(seg_labels)
     return x, y
 
 
-def generator(root_path, path_file, batch_size, n_classes, input_height, input_width, train=True):
+def generator(root_path, path_file, batch_size, n_classes, input_height, input_width, dtype='float32', train=True):
     f = open(path_file, 'r')
     items = f.readlines()
     f.close()
@@ -64,5 +67,5 @@ def generator(root_path, path_file, batch_size, n_classes, input_height, input_w
     else:
         for j in range(len(items) // batch_size):
             x, y = get_batch(items[j * batch_size:(j + 1) * batch_size],
-                             root_path, n_classes, input_height, input_width)
+                             root_path, n_classes, input_height, input_width, dtype=dtype)
             yield np.array(x), np.array(y)
