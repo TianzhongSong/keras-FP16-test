@@ -306,7 +306,8 @@ Human parsing
 <table width="95%">
   <tr>
     <td></td>
-    <td colspan=4 align=center>mIoU</td>
+    <td></td>
+    <td colspan=3 align=center>mIoU</td>
   </tr>
   <tr>
     <td></td>
@@ -316,7 +317,7 @@ Human parsing
     <td align=center>diff</td>
   </tr>
   <tr>
-    <td rowspan=4 align=center width="10%"><b>Unet</td>
+    <td rowspan=5 align=center width="10%"><b>Unet</td>
     <td align=center width="10%"><b>head</td>
     <td align=center width="10%"><b>0.66476</td>
     <td align=center width="10%"><b>0.66463</td>
@@ -342,7 +343,6 @@ Human parsing
   </tr>
   <tr>
     <td align=center width="10%"><b>mean</td>
-    <td align=center width="10%"></td>
     <td align=center width="10%"><b>0.52167</td>
     <td align=center width="10%"><b>0.52157</td>
     <td align=center width="10%"><b>-0.0001</td>
