@@ -257,11 +257,99 @@ SSD and YOLOv3 results on COCO val2017.
   </tr>
 </table>
 
+## Semantic Segmentation Part
+
+In this part, I evaluate semantic segmentation with float16 dtype.
+
+[U-net](https://arxiv.org/pdf/1505.04597.pdf) is adopted in this test.
+
+[HumanParsing-Dataset](https://github.com/lemondan/HumanParsing-Dataset) is adopted in this test.
+
+The tested models are trained by my-self.
+Training details can be found in this repo: [Person-Segmentation-Keras](https://github.com/TianzhongSong/Person-Segmentation-Keras).
+
+### Usage
+
+For person segmentation (binary classification) task.
+
+    python eval_segmentation.py --model='unet' --dtype='float16' --nClasses=2
+    
+For human parsing (multi-class classification) task.
+
+    python eval_segmentation.py --model='unet' --dtype='float16' --nClasses=5
+
+### Results
+
+Person segmentation
+
+<table width="95%">
+  <tr>
+    <td></td>
+    <td colspan=3 align=center>mIoU</td>
+  </tr>
+  <tr>
+    <td align=center><b>Model</td>
+    <td align=center>float32</td>
+    <td align=center>float16</td>
+    <td align=center>diff</td>
+  </tr>
+  <tr>
+    <td align=center width="10%"><b>Unet</td>
+    <td align=center width="10%"><b>0.8920</td>
+    <td align=center width="10%"><b>0.8918</td>
+    <td align=center width="10%"><b>-0.0002</td>
+  </tr>
+</table>
+
+Human parsing
+
+<table width="95%">
+  <tr>
+    <td></td>
+    <td colspan=4 align=center>mIoU</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td align=center><b>Part</td>
+    <td align=center>float32</td>
+    <td align=center>float16</td>
+    <td align=center>diff</td>
+  </tr>
+  <tr>
+    <td rowspan=4 align=center width="10%"><b>Unet</td>
+    <td align=center width="10%"><b>head</td>
+    <td align=center width="10%"><b>0.66476</td>
+    <td align=center width="10%"><b>0.66463</td>
+    <td align=center width="10%"><b>-0.00013</td>
+  </tr>
+  <tr>
+    <td align=center width="10%"><b>upper body</td>
+    <td align=center width="10%"><b>0.48639</td>
+    <td align=center width="10%"><b>0.48640</td>
+    <td align=center width="10%"><b>0.00001</td>
+  </tr>
+  <tr>
+    <td align=center width="10%"><b>both hands</td>
+    <td align=center width="10%"><b>0.27016</td>
+    <td align=center width="10%"><b>0.27005</td>
+    <td align=center width="10%"><b>-0.00011</td>
+  </tr>
+  <tr>
+    <td align=center width="10%"><b>lower body</td>
+    <td align=center width="10%"><b>0.66536</td>
+    <td align=center width="10%"><b>0.66520</td>
+    <td align=center width="10%"><b>-0.00016</td>
+  </tr>
+  <tr>
+    <td align=center width="10%"><b>mean</td>
+    <td align=center width="10%"></td>
+    <td align=center width="10%"><b>0.52167</td>
+    <td align=center width="10%"><b>0.52157</td>
+    <td align=center width="10%"><b>-0.0001</td>
+  </tr>
+</table>
+
 ### ToDo
-
-Object detection(SSD, Yolo)
-
-Semantic segmentation
 
 PointNet
 
