@@ -56,6 +56,7 @@ def get_coco_category_maps(annotations_file):
 
     return cats_to_classes, classes_to_cats, cats_to_names, classes_to_names
 
+
 def predict_all_to_json(out_file,
                         model,
                         img_height,
@@ -125,14 +126,24 @@ def predict_all_to_json(out_file,
         raise ValueError("Unexpected argument value: `data_generator_mode` can be either of 'resize' or 'pad', but received '{}'.".format(data_generator_mode))
 
     # Set the generator parameters.
-    generator = data_generator.generate(batch_size=batch_size,
-                                        shuffle=False,
-                                        transformations=transformations,
-                                        label_encoder=None,
-                                        returns={'processed_images',
-                                                 'image_ids',
-                                                 'inverse_transform'},
-                                        keep_images_without_gt=True)
+    if mode in ['yolo320', 'yolo416', 'yolo608']:
+        generator = data_generator.generate(batch_size=batch_size,
+                                            shuffle=False,
+                                            transformations=transformations,
+                                            label_encoder=None,
+                                            returns={'original_images',
+                                                     'image_ids',
+                                                     'inverse_transform'},
+                                            keep_images_without_gt=True)
+    else:
+        generator = data_generator.generate(batch_size=batch_size,
+                                            shuffle=False,
+                                            transformations=transformations,
+                                            label_encoder=None,
+                                            returns={'processed_images',
+                                                     'image_ids',
+                                                     'inverse_transform'},
+                                            keep_images_without_gt=True)
     # Put the results in this list.
     results = []
     # Compute the number of batches to iterate over the entire dataset.
@@ -151,8 +162,6 @@ def predict_all_to_json(out_file,
             for item in batch_X:
                 item = Image.fromarray(item)
                 tmp.append(np.array(letterbox_image(item, (img_width, img_height))))
-            # tmp = np.array(tmp, dtype=np.float32)
-            # tmp /= 255.
             batch_X = tmp
         # Predict.
         y_pred = model.predict(batch_X)
