@@ -69,7 +69,7 @@ class Yolo(object):
                 })
             output = []
             for i, c in reversed(list(enumerate(out_classes))):
-                output.append([c] + out_scores[i] + out_boxes[i])
+                output.append([c + 1] + out_scores[i] + out_boxes[i])
             outputs.append(output)
         return outputs
 
