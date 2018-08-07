@@ -50,8 +50,7 @@ if __name__ == '__main__':
     for x, y in generator(images_path, val_file, 1, n_classes, input_height, input_width, dtype=args.dtype, train=False):
         pbdr.update(1)
         pr = m.predict(x)[0]
-        pr = pr.reshape((input_height, input_width, n_classes)).argmax(axis=2)
-        pt = pr.reshape((input_height * input_width))
+        pt = pr.argmax(axis=1)
         for c in range(1, n_classes):
             gt = y[:, :, c]
             gt = gt.reshape((input_height * input_width))
