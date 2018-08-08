@@ -60,7 +60,7 @@ if __name__ == "__main__":
         raise ValueError("Do not support {}".format(args.model))
     model.summary()
     model_name = args.model if args.model != 'mobilenet' else args.model + '_' + str(args.alpha)
-    model.load_weights('./weights/{}'.format(model_name), by_name=True)
+    model.load_weights('./weights/{}'.format(weights[model_name]), by_name=True)
     print('Evaluating {0} with {1} data type'.format(args.model, args.dtype))
 
     dg = DataGenerator('./data/val224_compressed.pkl', model=args.model, dtype=args.dtype)
