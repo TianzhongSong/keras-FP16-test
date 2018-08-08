@@ -181,6 +181,8 @@ An example for evaluating SSD300 on VOC2007 test set
 
 ### Results
 
+Notice that SSD models suffer significant accuracy loss. 
+
 SSD results on VOC2007 test set
 
 <table width="95%">
@@ -207,8 +209,6 @@ SSD results on VOC2007 test set
     <td align=center width="10%"><b>-0.042</td>
   </tr>
 </table>
-
-Notice: The results of SSD512 seem to not match the results reported in [refered repo](https://github.com/pierluigiferrari/ssd_keras).
 
 The AP of each category can be found in this [doc](https://github.com/TianzhongSong/keras-FP16-test/blob/master/docs/ssd_results.md)
 
