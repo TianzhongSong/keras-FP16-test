@@ -23,7 +23,7 @@ from utils.object_detection_2d_geometric_ops import Resize
 from utils.object_detection_2d_patch_sampling_ops import RandomPadFixedAR
 from utils.object_detection_2d_photometric_ops import ConvertTo3Channels
 from utils.object_detection_2d_misc_utils import apply_inverse_transforms
-from utils.yolo_utils import letterbox_image
+from utils.yolo_utils import letterbox_image, yolo_inverse_transforms
 
 
 def get_coco_category_maps(annotations_file):
@@ -132,8 +132,7 @@ def predict_all_to_json(out_file,
                                             transformations=transformations,
                                             label_encoder=None,
                                             returns={'original_images',
-                                                     'image_ids',
-                                                     'inverse_transform'},
+                                                     'image_ids'},
                                             keep_images_without_gt=True)
     else:
         generator = data_generator.generate(batch_size=batch_size,
@@ -154,25 +153,32 @@ def predict_all_to_json(out_file,
     tr = trange(n_batches, file=sys.stdout)
     tr.set_description('Producing results file')
     for i in tr:
-        # Generate batch.
-        batch_X, batch_image_ids, batch_inverse_transforms = next(generator)
-        # pre-process for yolo model
         if mode in ['yolo320', 'yolo416', 'yolo608']:
-            tmp = []
+            # Generate batch.
+            batch_image_ids, batch_X = next(generator)
+            y_pred = []
             for item in batch_X:
+                tmp = []
                 item = Image.fromarray(item)
-                tmp.append(np.array(letterbox_image(item, (img_width, img_height))))
-            batch_X = tmp
-        # Predict.
-        y_pred = model.predict(batch_X)
-
-        # Filter out the all-zeros dummy elements of `y_pred`.
-        y_pred_filtered = []
-        for i in range(len(y_pred)):
-            y_pred_filtered.append(y_pred[i][y_pred[i,:,0] != 0])
-        y_pred = y_pred_filtered
-        # Convert the predicted box coordinates for the original images.
-        y_pred = apply_inverse_transforms(y_pred, batch_inverse_transforms)
+                item, nw, nh, resize_scale = letterbox_image(item, (img_width, img_height))
+                dw = (img_width - nw) /2
+                dh = (img_height - nh) / 2
+                tmp.append(np.array(item))
+                pred = model.predict(tmp)[0]
+                # Convert the predicted box coordinates for the original images.
+                pred = yolo_inverse_transforms(pred, dw, dh, resize_scale)
+                y_pred.append(pred)
+        else:
+            # Generate batch.
+            batch_X, batch_image_ids, batch_inverse_transforms = next(generator)
+            y_pred = model.predict(batch_X)
+            # Filter out the all-zeros dummy elements of `y_pred`.
+            y_pred_filtered = []
+            for i in range(len(y_pred)):
+                y_pred_filtered.append(y_pred[i][y_pred[i,:,0] != 0])
+            y_pred = y_pred_filtered
+            # Convert the predicted box coordinates for the original images.
+            y_pred = apply_inverse_transforms(y_pred, batch_inverse_transforms)
 
         # Convert each predicted box into the results format.
         for k, batch_item in enumerate(y_pred):
