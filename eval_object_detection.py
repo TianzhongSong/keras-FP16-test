@@ -220,6 +220,10 @@ if __name__ == '__main__':
         print("{:<14}{:<6}{}".format('', 'mAP', round(mean_average_precision, 3)))
 
     elif args.eval_dataset == 'coco':
+        if args.model in ['yolo320', 'yolo416', 'yolo608']:
+            batch_size = 1
+        else:
+            batch_size = 20
         img_height = int(args.model[-3:])
         img_width = img_height
         n_classes = 80
