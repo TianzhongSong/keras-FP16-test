@@ -31,11 +31,14 @@ def letterbox_image(image, size):
 
 
 def yolo_inverse_transforms(pred, dw, dh, scale):
-    pred[:, 2] -= dw
-    pred[:, 3] -= dh
-    pred[:, 4] -= dw
-    pred[:, 5] -= dh
-    pred[:, 2:5] /= scale
+    pred[:, 3] -= dw
+    pred[:, 2] -= dh
+    pred[:, 5] -= dw
+    pred[:, 4] -= dh
+    pred[:, 2] /= scale
+    pred[:, 3] /= scale
+    pred[:, 4] /= scale
+    pred[:, 5] /= scale
     return pred
 
 
