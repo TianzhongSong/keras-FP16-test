@@ -27,7 +27,16 @@ def letterbox_image(image, size):
     image = image.resize((nw, nh), Image.BICUBIC)
     new_image = Image.new('RGB', size, (128, 128, 128))
     new_image.paste(image, ((w - nw) // 2, (h - nh) // 2))
-    return new_image
+    return new_image, nw, nh, scale
+
+
+def yolo_inverse_transforms(pred, dw, dh, scale):
+    pred[:, 2] -= dw
+    pred[:, 3] -= dh
+    pred[:, 4] -= dw
+    pred[:, 5] -= dh
+    pred[:, 2:5] /= scale
+    return pred
 
 
 def rand(a=0, b=1):
