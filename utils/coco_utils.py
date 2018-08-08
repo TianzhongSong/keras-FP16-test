@@ -165,9 +165,12 @@ def predict_all_to_json(out_file,
                 dh = (img_height - nh) / 2
                 tmp.append(np.array(item))
                 pred = model.predict(tmp)[0]
-                # Convert the predicted box coordinates for the original images.
-                pred = yolo_inverse_transforms(pred, dw, dh, resize_scale)
-                y_pred.append(pred)
+                if len(np.array(pred).shape) == 2:
+                    # Convert the predicted box coordinates for the original images.
+                    pred = yolo_inverse_transforms(np.array(pred), dw, dh, resize_scale)
+                    y_pred.append(pred)
+                else:
+                    y_pred = []
         else:
             # Generate batch.
             batch_X, batch_image_ids, batch_inverse_transforms = next(generator)
