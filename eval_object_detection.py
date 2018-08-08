@@ -22,12 +22,13 @@ weights = {'ssd300voc': 'VGG_VOC0712Plus_SSD_300x300_ft_iter_160000.h5',
 
 
 class Yolo(object):
-    def __init__(self, input_shape=(320, 320), score=0.01, iou_threshold=0.45):
+    def __init__(self, input_shape=(320, 320), score=0.01, iou_threshold=0.45, dtype='float32'):
         self.input_shape = input_shape
         self.score = score
         self.iou = iou_threshold
         self.class_names = self._get_class()
         self.anchors = self._get_anchors()
+        self.dtype = dtype
         self.sess = K.get_session()
         self.boxes, self.scores, self.classes = self.generate()
 
@@ -57,7 +58,10 @@ class Yolo(object):
     def predict(self, inputs):
         outputs = []
         for item in inputs:
-            item = np.float32(item)
+            if self.dtype == 'float32':
+                item = np.float32(item)
+            else:
+                item = np.float16(item)               
             item /= 255.
             item = np.expand_dims(item, 0)
             out_boxes, out_scores, out_classes = self.sess.run(
@@ -143,7 +147,8 @@ def create_model(model_type='ssd300', dataset='voc2007', dtype='float32'):
         img_width = img_height
         model = Yolo(input_shape=(img_height, img_width),
                      score=0.01,
-                     iou_threshold=0.45)
+                     iou_threshold=0.45,
+                     dtype=dtype)
     else:
         raise ValueError("Only support SSD300, SSD512 and YOLOv3 now!")
 
