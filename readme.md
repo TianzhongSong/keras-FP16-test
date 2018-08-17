@@ -349,9 +349,34 @@ Human parsing
   </tr>
 </table>
 
-### ToDo
+## PointNet Evaluation
 
-PointNet
+[PointNet: Deep Learning on Point Sets for 3D Classification and Segmentation](https://arxiv.org/abs/1612.00593)
+
+In this evaluation, I use a pre-trained PointNet reference to [PointNet-Keras](https://github.com/TianzhongSong/PointNet-Keras).
+
+### Results
+
+3D classification
+
+<table width="95%">
+  <tr>
+    <td></td>
+    <td colspan=3 align=center>acc</td>
+  </tr>
+  <tr>
+    <td align=center><b>Model</td>
+    <td align=center>float32</td>
+    <td align=center>float16</td>
+    <td align=center>diff</td>
+  </tr>
+  <tr>
+    <td align=center width="10%"><b>PointNet_cls</td>
+    <td align=center width="10%"><b>0.87824</td>
+    <td align=center width="10%"><b>0.87784</td>
+    <td align=center width="10%"><b>-0.0004</td>
+  </tr>
+</table>
 
 ### Reference
 
