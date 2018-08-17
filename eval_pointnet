@@ -1,0 +1,27 @@
+from models.pointnet_cls import PointNet
+from utils.point_cloud_data_generator import DataGenerator
+from keras import backend as K
+import argparse
+
+
+if __name__ == '__main__':
+    parse = argparse.ArgumentParser()
+    parse.add_argument('--model', type=str, default='cls', help='supports cls and seg')
+    parse.add_argument('--dtype', type=str, default='float32')
+    args = parse.parse_args()
+
+    K.set_floatx(args.dtype)
+
+    if args.model == 'cls':
+        nb_classes = 40
+        data = './data/ply_data_test_cls.h5'
+        model = PointNet(nb_classes)
+        model.compile(optimizer='adam',
+                      loss='categorical_crossentropy',
+                      metrics=['accuracy'])
+        model.load_weights('./weights/pointnet_cls.h5', by_name=True)
+        dg = DataGenerator(data, 32, nb_classes, False)
+
+        score = model.evaluate_generator(dg.generator(), steps=2468 // 32)
+        print(score[0])
+        print(score[1])
